@@ -1,3 +1,4 @@
+var animalsListDiv = document.getElementById('animalsListDiv');
 var cliqueAquiBtn = document.getElementById('cliqueAquiBtn');
 
 cliqueAquiBtn.addEventListener('click',function(){
@@ -7,9 +8,20 @@ cliqueAquiBtn.addEventListener('click',function(){
     
     ourRequest.onload = function() {
         var ourData = JSON.parse(ourRequest.responseText);
-        console.log(ourData[0]);
+        renderHTML(ourData);
     };
     
     ourRequest.send();
 
 });
+
+function renderHTML(data) {
+
+    var htmlString = "";
+
+    for (var i = 0; i < Object.keys(data).length; i++) {
+        htmlString += "<p>" + data[i].name + "</p>";
+    }
+
+    animalsListDiv.insertAdjacentHTML('beforeend', htmlString);
+}
